@@ -70,12 +70,12 @@ export default function RecommendationCard({
           ? "rgba(16,185,129,0.05)"
           : triggered
           ? `${color}0D`
-          : "rgba(255,255,255,0.02)",
+          : "rgba(var(--ink-rgb),0.02)",
         borderColor: isAcked
           ? "rgba(16,185,129,0.25)"
           : triggered
           ? `${color}44`
-          : "rgba(255,255,255,0.06)",
+          : "rgba(var(--ink-rgb),0.06)",
       }}
     >
       <div className="flex gap-4">
@@ -89,7 +89,7 @@ export default function RecommendationCard({
         <div className="flex-1 min-w-0">
           {/* Header */}
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-            <span className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>
+            <span className="text-sm font-semibold" style={{ color: "rgba(var(--ink-rgb),0.85)" }}>
               {label}
             </span>
             {triggered && !isAcked && (
@@ -120,7 +120,7 @@ export default function RecommendationCard({
           <p
             className="text-xs leading-relaxed"
             style={{
-              color: triggered ? "rgba(255,255,255,0.65)" : "rgba(255,255,255,0.35)",
+              color: triggered ? "rgba(var(--ink-rgb),0.65)" : "rgba(var(--ink-rgb),0.35)",
             }}
           >
             {recommendation}
@@ -132,12 +132,12 @@ export default function RecommendationCard({
               className="mt-2 pt-2 text-xs"
               style={{
                 borderTop: "1px solid rgba(16,185,129,0.15)",
-                color: "rgba(255,255,255,0.3)",
+                color: "rgba(var(--ink-rgb),0.3)",
               }}
             >
               <span>Acknowledged {format(new Date(acknowledged.acknowledged_at), "MMM dd, HH:mm")}</span>
               {acknowledged.notes && (
-                <span className="italic ml-1" style={{ color: "rgba(255,255,255,0.4)" }}>
+                <span className="italic ml-1" style={{ color: "rgba(var(--ink-rgb),0.4)" }}>
                   — &quot;{acknowledged.notes}&quot;
                 </span>
               )}
@@ -173,9 +173,9 @@ export default function RecommendationCard({
                     autoFocus
                     className="w-full text-xs px-3 py-2 rounded-lg outline-none"
                     style={{
-                      background: "rgba(255,255,255,0.06)",
-                      border: "1px solid rgba(255,255,255,0.12)",
-                      color: "rgba(255,255,255,0.7)",
+                      background: "rgba(var(--ink-rgb),0.06)",
+                      border: "1px solid rgba(var(--ink-rgb),0.12)",
+                      color: "rgba(var(--ink-rgb),0.7)",
                     }}
                   />
                   <div className="flex gap-2">
@@ -195,7 +195,7 @@ export default function RecommendationCard({
                     <button
                       onClick={() => { setShowInput(false); setNotes(""); }}
                       className="text-xs px-3 py-1.5 rounded-lg"
-                      style={{ background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.35)" }}
+                      style={{ background: "rgba(var(--ink-rgb),0.04)", color: "rgba(var(--ink-rgb),0.35)" }}
                     >
                       Cancel
                     </button>

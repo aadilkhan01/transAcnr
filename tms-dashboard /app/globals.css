@@ -2,13 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-rgb: 255, 255, 255;
+  --ink-rgb: 10, 15, 30;
+  --panel-strong: #F1F4FA;
+  --accent: #0891B2;
+  --accent-rgb: 8, 145, 178;
+}
+
+.dark {
+  --bg-rgb: 10, 15, 30;
+  --ink-rgb: 255, 255, 255;
+  --panel-strong: #0D1424;
+  --accent: #00D4FF;
+  --accent-rgb: 0, 212, 255;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: #0A0F1E;
-  color: white;
+  background: rgb(var(--bg-rgb));
+  color: rgb(var(--ink-rgb));
   font-family: "Space Grotesk", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -18,14 +34,14 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(var(--ink-rgb), 0.02);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--ink-rgb), 0.1);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 212, 255, 0.3);
+  background: rgba(var(--accent-rgb), 0.3);
 }
 
 @keyframes pulse_slow {

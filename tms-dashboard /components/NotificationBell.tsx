@@ -12,8 +12,8 @@ export default function NotificationBell({ count, onClick }: NotificationBellPro
       onClick={onClick}
       className="relative flex items-center justify-center w-9 h-9 rounded-xl transition-all hover:scale-105"
       style={{
-        background: hasAlerts ? "rgba(239,68,68,0.15)" : "rgba(255,255,255,0.05)",
-        border: `1px solid ${hasAlerts ? "rgba(239,68,68,0.4)" : "rgba(255,255,255,0.1)"}`,
+        background: hasAlerts ? "rgba(239,68,68,0.15)" : "rgba(var(--ink-rgb),0.05)",
+        border: `1px solid ${hasAlerts ? "rgba(239,68,68,0.4)" : "rgba(var(--ink-rgb),0.1)"}`,
       }}
       title="Notifications"
     >
@@ -22,7 +22,7 @@ export default function NotificationBell({ count, onClick }: NotificationBellPro
         height="16"
         viewBox="0 0 24 24"
         fill="none"
-        stroke={hasAlerts ? "#EF4444" : "rgba(255,255,255,0.5)"}
+        stroke={hasAlerts ? "#EF4444" : "rgba(var(--ink-rgb),0.5)"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

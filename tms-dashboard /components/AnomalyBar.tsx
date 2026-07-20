@@ -10,10 +10,10 @@ export default function AnomalyBar({ score, label, color }: AnomalyBarProps) {
   const pct = Math.min(score * 100, 100);
   return (
     <div className="flex items-center gap-3">
-      <span className="w-32 text-xs text-right" style={{ color: "rgba(255,255,255,0.45)" }}>
+      <span className="w-32 text-xs text-right" style={{ color: "rgba(var(--ink-rgb),0.45)" }}>
         {label}
       </span>
-      <div className="flex-1 h-2 rounded-full" style={{ background: "rgba(255,255,255,0.06)" }}>
+      <div className="flex-1 h-2 rounded-full" style={{ background: "rgba(var(--ink-rgb),0.06)" }}>
         <div
           className="h-2 rounded-full transition-all duration-700"
           style={{

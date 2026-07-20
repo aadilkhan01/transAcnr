@@ -41,8 +41,8 @@ export default function SystemStatusGrid({ latest }: SystemStatusGridProps) {
             key={key}
             className="p-4 rounded-2xl border transition-all duration-500"
             style={{
-              background: pred.triggered ? `${color}0A` : "rgba(255,255,255,0.02)",
-              borderColor: pred.triggered ? `${color}44` : "rgba(255,255,255,0.07)",
+              background: pred.triggered ? `${color}0A` : "rgba(var(--ink-rgb),0.02)",
+              borderColor: pred.triggered ? `${color}44` : "rgba(var(--ink-rgb),0.07)",
               boxShadow: pred.triggered ? `0 4px 24px ${color}18` : "none",
             }}
           >
@@ -50,8 +50,8 @@ export default function SystemStatusGrid({ latest }: SystemStatusGridProps) {
               <div className="flex items-center gap-2">
                 <span className="text-xl">{icon}</span>
                 <div>
-                  <p className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.85)" }}>{label}</p>
-                  <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>{sub}</p>
+                  <p className="text-sm font-semibold" style={{ color: "rgba(var(--ink-rgb),0.85)" }}>{label}</p>
+                  <p className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>{sub}</p>
                 </div>
               </div>
               <span className="text-base">{riskIcon}</span>
@@ -59,10 +59,10 @@ export default function SystemStatusGrid({ latest }: SystemStatusGridProps) {
 
             <div className="mb-3">
               <div className="flex justify-between text-xs mb-1.5">
-                <span style={{ color: "rgba(255,255,255,0.35)" }}>Failure Probability</span>
+                <span style={{ color: "rgba(var(--ink-rgb),0.35)" }}>Failure Probability</span>
                 <span className="font-mono font-bold" style={{ color }}>{(pred.probability * 100).toFixed(1)}%</span>
               </div>
-              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+              <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "rgba(var(--ink-rgb),0.06)" }}>
                 <div
                   className="h-full rounded-full transition-all duration-700"
                   style={{
@@ -75,8 +75,8 @@ export default function SystemStatusGrid({ latest }: SystemStatusGridProps) {
 
             <div className="flex items-end justify-between">
               <div>
-                <p className="text-xs mb-0.5" style={{ color: "rgba(255,255,255,0.25)" }}>Anomaly Score</p>
-                <p className="text-sm font-mono font-bold" style={{ color: "rgba(255,255,255,0.55)" }}>
+                <p className="text-xs mb-0.5" style={{ color: "rgba(var(--ink-rgb),0.25)" }}>Anomaly Score</p>
+                <p className="text-sm font-mono font-bold" style={{ color: "rgba(var(--ink-rgb),0.55)" }}>
                   {pred.anomaly_score.toFixed(4)}
                 </p>
               </div>

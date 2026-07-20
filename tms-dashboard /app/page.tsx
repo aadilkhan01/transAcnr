@@ -10,6 +10,7 @@ import HistoryChart from "@/components/HistoryChart";
 import NotificationBell from "@/components/NotificationBell";
 import NotificationPanel from "@/components/NotificationPanel";
 import AlertTimeline from "@/components/AlertTimeline";
+import ThemeToggle from "@/components/ThemeToggle";
 import { format, parseISO } from "date-fns";
 
 const OVERALL_RISK_COLORS: Record<string, string> = {
@@ -31,7 +32,7 @@ const LABEL_MAP: Record<string, string> = {
 
 const COLOR_MAP: Record<string, string> = {
   compressor_failure:  "#F59E0B",
-  pump_failure:        "#00D4FF",
+  pump_failure:        "var(--accent)",
   cooling_degradation: "#EF4444",
 };
 
@@ -138,42 +139,43 @@ export default function DashboardPage() {
     : 100;
 
   return (
-    <div className="min-h-screen text-white" style={{ background: "#0A0F1E", fontFamily: "Space Grotesk, sans-serif" }}>
+    <div className="min-h-screen" style={{ background: "rgb(var(--bg-rgb))", color: "rgb(var(--ink-rgb))", fontFamily: "Space Grotesk, sans-serif" }}>
 
       {/* ── Header ──────────────────────────────────────────── */}
       <header
         className="sticky top-0 z-50 flex items-center justify-between px-6 py-3 border-b"
-        style={{ background: "rgba(10,15,30,0.94)", borderColor: "rgba(255,255,255,0.06)", backdropFilter: "blur(14px)" }}
+        style={{ background: "rgba(var(--bg-rgb),0.94)", borderColor: "rgba(var(--ink-rgb),0.06)", backdropFilter: "blur(14px)" }}
       >
         <div className="flex items-center gap-3">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center text-lg"
-            style={{ background: "linear-gradient(135deg,#00D4FF22,#00D4FF44)", border: "1px solid rgba(0,212,255,0.25)" }}
+            style={{ background: "linear-gradient(135deg, rgba(var(--accent-rgb),0.13), rgba(var(--accent-rgb),0.27))", border: "1px solid rgba(var(--accent-rgb),0.25)" }}
           >
             🌡️
           </div>
           <div>
-            <h1 className="text-sm font-bold tracking-tight" style={{ color: "#00D4FF" }}>
+            <h1 className="text-sm font-bold tracking-tight" style={{ color: "var(--accent)" }}>
               TMS Predictive Maintenance
             </h1>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <p className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
               Thermal Management System · Real-time Monitor
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs hidden sm:block" style={{ color: "rgba(255,255,255,0.25)" }}>
+          <span className="text-xs hidden sm:block" style={{ color: "rgba(var(--ink-rgb),0.25)" }}>
             {format(lastRefresh, "HH:mm:ss")}
           </span>
           <button
             onClick={() => { fetchData(); syncNotifications(); }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all hover:scale-105"
-            style={{ background: "rgba(0,212,255,0.08)", border: "1px solid rgba(0,212,255,0.25)", color: "#00D4FF" }}
+            style={{ background: "rgba(var(--accent-rgb),0.08)", border: "1px solid rgba(var(--accent-rgb),0.25)", color: "var(--accent)" }}
           >
             ↻ Refresh
           </button>
           <NotificationBell count={notifications.length} onClick={() => setShowPanel(true)} />
+          <ThemeToggle />
           {latest && (
             <div
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
@@ -202,8 +204,8 @@ export default function DashboardPage() {
       {loading && (
         <div className="flex items-center justify-center h-[80vh]">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-full border-2 animate-spin" style={{ borderColor: "#00D4FF", borderTopColor: "transparent" }} />
-            <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>Connecting to MongoDB…</p>
+            <div className="w-12 h-12 rounded-full border-2 animate-spin" style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }} />
+            <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.4)" }}>Connecting to MongoDB…</p>
           </div>
         </div>
       )}
@@ -214,7 +216,7 @@ export default function DashboardPage() {
           <div className="p-8 rounded-2xl max-w-md text-center" style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.3)" }}>
             <p className="text-4xl mb-3">⚠️</p>
             <p className="text-sm font-semibold mb-1" style={{ color: "#EF4444" }}>Connection Error</p>
-            <p className="text-xs mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>{error}</p>
+            <p className="text-xs mb-4" style={{ color: "rgba(var(--ink-rgb),0.4)" }}>{error}</p>
             <button
               onClick={() => { fetchData(); syncNotifications(); }}
               className="px-4 py-2 rounded-lg text-sm font-semibold"
@@ -242,7 +244,7 @@ export default function DashboardPage() {
                   ACTIVE ALERT — {latest.summary.targets_triggered.length} System(s) Triggered
                 </p>
                 {(latest.summary.active_recommendations ?? []).map((r, i) => (
-                  <p key={i} className="text-xs" style={{ color: "rgba(255,255,255,0.6)" }}>{r}</p>
+                  <p key={i} className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.6)" }}>{r}</p>
                 ))}
               </div>
             </div>
@@ -275,7 +277,7 @@ export default function DashboardPage() {
 
           {/* ── Risk Gauges ─────────────────────────────────── */}
           <section>
-            <h2 className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <h2 className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
               Failure Probability · Per System
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -294,23 +296,23 @@ export default function DashboardPage() {
           {/* ── Anomaly + Threshold ──────────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Anomaly Scores */}
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <div className="p-5 rounded-2xl" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Anomaly Scores
               </h3>
               <div className="space-y-4">
                 <AnomalyBar score={latest?.predictions?.compressor_failure?.anomaly_score}  label="Compressor"     color="#F59E0B" />
-                <AnomalyBar score={latest?.predictions?.pump_failure?.anomaly_score}         label="Pump"           color="#00D4FF" />
+                <AnomalyBar score={latest?.predictions?.pump_failure?.anomaly_score}         label="Pump"           color="var(--accent)" />
                 <AnomalyBar score={latest?.predictions?.cooling_degradation?.anomaly_score}  label="Cooling System" color="#EF4444" />
               </div>
-              <p className="mt-4 pt-4 text-xs" style={{ borderTop: "1px solid rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.22)" }}>
+              <p className="mt-4 pt-4 text-xs" style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.06)", color: "rgba(var(--ink-rgb),0.22)" }}>
                 Deviation from normal operating range (0 = normal, 1 = highly anomalous).
               </p>
             </div>
 
             {/* Probability vs Threshold */}
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <div className="p-5 rounded-2xl" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Probability vs Threshold
               </h3>
               <div className="space-y-4">
@@ -322,24 +324,24 @@ export default function DashboardPage() {
                   return (
                     <div key={key}>
                       <div className="flex justify-between text-xs mb-1.5">
-                        <span style={{ color: "rgba(255,255,255,0.45)" }}>{LABEL_MAP[key]}</span>
+                        <span style={{ color: "rgba(var(--ink-rgb),0.45)" }}>{LABEL_MAP[key]}</span>
                         <span className="font-mono" style={{ color }}>
                           {(pred.probability * 100).toFixed(1)}%{" "}
-                          <span style={{ color: "rgba(255,255,255,0.22)" }}>/ Threshold {Math.round(pred.threshold * 100)}%</span>
+                          <span style={{ color: "rgba(var(--ink-rgb),0.22)" }}>/ Threshold {Math.round(pred.threshold * 100)}%</span>
                         </span>
                       </div>
-                      <div className="relative h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <div className="relative h-2.5 rounded-full overflow-hidden" style={{ background: "rgba(var(--ink-rgb),0.06)" }}>
                         <div
                           className="absolute h-full rounded-full transition-all duration-700"
                           style={{ width: `${pct}%`, background: color, boxShadow: pred.triggered ? `0 0 8px ${color}` : "none" }}
                         />
-                        <div className="absolute top-0 bottom-0 w-0.5" style={{ left: `${threshPct}%`, background: "rgba(255,255,255,0.5)" }} />
+                        <div className="absolute top-0 bottom-0 w-0.5" style={{ left: `${threshPct}%`, background: "rgba(var(--ink-rgb),0.5)" }} />
                       </div>
                     </div>
                   );
                 })}
               </div>
-              <p className="mt-4 text-xs" style={{ color: "rgba(255,255,255,0.22)" }}>
+              <p className="mt-4 text-xs" style={{ color: "rgba(var(--ink-rgb),0.22)" }}>
                 White line = alert threshold. Bar past threshold = triggered.
               </p>
             </div>
@@ -348,10 +350,10 @@ export default function DashboardPage() {
           {/* ── Recommendations ──────────────────────────────── */}
           <section>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+              <h2 className="text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Maintenance Recommendations
               </h2>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+              <span className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.2)" }}>
                 Click &quot;Acknowledge&quot; to confirm action taken
               </span>
             </div>
@@ -374,18 +376,18 @@ export default function DashboardPage() {
           {/* ── Trend Chart ──────────────────────────────────── */}
           <section>
             <div className="flex items-center justify-between mb-3">
-              <h2 className="text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
+              <h2 className="text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Failure Probability Over Time
               </h2>
-              <span className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+              <span className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.2)" }}>
                 Last {history?.length} runs
               </span>
             </div>
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
+            <div className="p-5 rounded-2xl" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
               {history?.length < 2 ? (
                 <div className="flex flex-col items-center justify-center h-48 gap-3">
                   <span className="text-3xl">📈</span>
-                  <p className="text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>Not enough history yet. Run more inference cycles.</p>
+                  <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>Not enough history yet. Run more inference cycles.</p>
                 </div>
               ) : (
                 <HistoryChart history={history} />
@@ -396,21 +398,21 @@ export default function DashboardPage() {
           {/* ── Alert Timeline + Run Log ─────────────────────── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {/* Alert Timeline */}
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <div className="p-5 rounded-2xl" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Recent Alert Timeline
               </h3>
               <AlertTimeline history={history} />
             </div>
 
             {/* Run Log */}
-            <div className="p-5 rounded-2xl overflow-auto" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <div className="p-5 rounded-2xl overflow-auto" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
+              <h3 className="text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                 Run Log
               </h3>
               <table className="w-full text-xs" style={{ borderCollapse: "separate", borderSpacing: "0 4px" }}>
                 <thead>
-                  <tr style={{ color: "rgba(255,255,255,0.3)" }}>
+                  <tr style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
                     <th className="text-left pb-2 pr-3">Timestamp</th>
                     <th className="text-right pb-2 pr-3">Comp.</th>
                     <th className="text-right pb-2 pr-3">Pump</th>
@@ -423,14 +425,14 @@ export default function DashboardPage() {
                     const rc      = OVERALL_RISK_COLORS[h?.summary?.overall_risk_level] || "#10B981";
                     const isAlert = h?.summary?.targets_triggered?.length > 0;
                     return (
-                      <tr key={h._id} style={{ background: isAlert ? `${rc}08` : "rgba(255,255,255,0.02)" }}>
-                        <td className="py-1.5 pr-3 rounded-l-lg" style={{ color: "rgba(255,255,255,0.45)" }}>
+                      <tr key={h._id} style={{ background: isAlert ? `${rc}08` : "rgba(var(--ink-rgb),0.02)" }}>
+                        <td className="py-1.5 pr-3 rounded-l-lg" style={{ color: "rgba(var(--ink-rgb),0.45)" }}>
                           {format(parseISO(h?.inference_timestamp), "MM/dd HH:mm")}
                         </td>
                         <td className="py-1.5 pr-3 text-right font-mono" style={{ color: "#F59E0B" }}>
                           {(h?.predictions?.compressor_failure?.probability * 100).toFixed(1)}%
                         </td>
-                        <td className="py-1.5 pr-3 text-right font-mono" style={{ color: "#00D4FF" }}>
+                        <td className="py-1.5 pr-3 text-right font-mono" style={{ color: "var(--accent)" }}>
                           {(h?.predictions?.pump_failure?.probability * 100).toFixed(1)}%
                         </td>
                         <td className="py-1.5 pr-3 text-right font-mono" style={{ color: "#EF4444" }}>
@@ -451,10 +453,10 @@ export default function DashboardPage() {
 
           {/* ── Drift Report ─────────────────────────────────── */}
           <section>
-            <h2 className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(255,255,255,0.3)" }}>
+            <h2 className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>
               Data Drift Report
             </h2>
-            <div className="p-5 rounded-2xl" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)" }}>
+            <div className="p-5 rounded-2xl" style={{ background: "rgba(var(--ink-rgb),0.02)", border: "1px solid rgba(var(--ink-rgb),0.06)" }}>
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-2xl">{latest?.drift_report?.drift_detected ? "⚠️" : "✅"}</span>
                 <div>
@@ -464,7 +466,7 @@ export default function DashboardPage() {
                   >
                     {latest?.drift_report?.drift_detected ? "Data Drift Detected" : "No Data Drift Detected"}
                   </p>
-                  <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{latest?.drift_report?.reason}</p>
+                  <p className="text-xs mt-0.5" style={{ color: "rgba(var(--ink-rgb),0.4)" }}>{latest?.drift_report?.reason}</p>
                 </div>
               </div>
               {Object.keys(latest?.drift_report?.features ?? {}).length > 0 ? (
@@ -473,15 +475,15 @@ export default function DashboardPage() {
                     <div
                       key={k}
                       className="flex justify-between items-center p-2.5 rounded-lg"
-                      style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.05)" }}
+                      style={{ background: "rgba(var(--ink-rgb),0.03)", border: "1px solid rgba(var(--ink-rgb),0.05)" }}
                     >
-                      <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.55)" }}>{k}</span>
+                      <span className="text-xs font-mono" style={{ color: "rgba(var(--ink-rgb),0.55)" }}>{k}</span>
                       <span className="text-xs font-mono" style={{ color: "#F59E0B" }}>{JSON.stringify(v)}</span>
                     </div>
                   ))}
                 </div> 
               ) : (
-                <p className="text-xs text-center py-6" style={{ color: "rgba(255,255,255,0.2)" }}>
+                <p className="text-xs text-center py-6" style={{ color: "rgba(var(--ink-rgb),0.2)" }}>
                   No feature drift metrics available.
                 </p>
               )}
@@ -489,7 +491,7 @@ export default function DashboardPage() {
           </section>
 
           {/* Footer */}
-          <footer className="text-center py-4" style={{ color: "rgba(255,255,255,0.12)", fontSize: 11 }}>
+          <footer className="text-center py-4" style={{ color: "rgba(var(--ink-rgb),0.12)", fontSize: 11 }}>
             transACNR TMS · {latest?._id} · {format(lastRefresh, "yyyy-MM-dd HH:mm:ss")}
           </footer>
         </main>

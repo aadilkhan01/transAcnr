@@ -45,7 +45,7 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
       className="relative flex flex-col items-center p-5 rounded-2xl border transition-all duration-500"
       style={{
         background: bg,
-        borderColor: triggered ? color : "rgba(255,255,255,0.07)",
+        borderColor: triggered ? color : "rgba(var(--ink-rgb),0.07)",
         boxShadow: triggered ? `0 0 24px ${color}33` : "none",
       }}
     >
@@ -63,7 +63,7 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
         <path
           d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`}
           fill="none"
-          stroke="rgba(255,255,255,0.07)"
+          stroke="rgba(var(--ink-rgb),0.07)"
           strokeWidth="10"
           strokeLinecap="round"
         />
@@ -82,13 +82,13 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
         <text x={cx} y={cy - 4} textAnchor="middle" fill={color} fontSize="18" fontWeight="700" fontFamily="Space Grotesk, sans-serif">
           {(probability * 100).toFixed(1)}%
         </text>
-        <text x={cx} y={cy + 12} textAnchor="middle" fill="rgba(255,255,255,0.4)" fontSize="9" fontFamily="Space Grotesk, sans-serif">
+        <text x={cx} y={cy + 12} textAnchor="middle" fill="rgba(var(--ink-rgb),0.4)" fontSize="9" fontFamily="Space Grotesk, sans-serif">
           PROBABILITY
         </text>
       </svg>
 
       {/* Label */}
-      <p className="mt-1 text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(255,255,255,0.5)" }}>
+      <p className="mt-1 text-xs font-semibold tracking-widest uppercase" style={{ color: "rgba(var(--ink-rgb),0.5)" }}>
         {label}
       </p>
 

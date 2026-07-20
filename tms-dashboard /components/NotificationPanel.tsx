@@ -44,21 +44,21 @@ export default function NotificationPanel({
         className="fixed top-0 right-0 h-full z-50 flex flex-col notification-panel"
         style={{
           width: 380,
-          background: "#0D1424",
-          borderLeft: "1px solid rgba(255,255,255,0.08)",
+          background: "var(--panel-strong)",
+          borderLeft: "1px solid rgba(var(--ink-rgb),0.08)",
           boxShadow: "-24px 0 80px rgba(0,0,0,0.6)",
         }}
       >
         {/* Header */}
         <div
           className="flex items-center justify-between px-5 py-4"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
+          style={{ borderBottom: "1px solid rgba(var(--ink-rgb),0.06)" }}
         >
           <div>
-            <h2 className="text-sm font-bold" style={{ color: "rgba(255,255,255,0.9)" }}>
+            <h2 className="text-sm font-bold" style={{ color: "rgba(var(--ink-rgb),0.9)" }}>
               Notifications
             </h2>
-            <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>
+            <p className="text-xs mt-0.5" style={{ color: "rgba(var(--ink-rgb),0.35)" }}>
               {notifications.length > 0
                 ? `${notifications.length} unread alert${notifications.length !== 1 ? "s" : ""}`
                 : "All clear"}
@@ -68,11 +68,11 @@ export default function NotificationPanel({
             {notifications.length > 0 && (
               <button
                 onClick={onDismissAll}
-                className="text-xs px-3 py-1.5 rounded-lg transition-all hover:bg-white/10"
+                className="text-xs px-3 py-1.5 rounded-lg transition-all hover:bg-black/5 dark:hover:bg-white/10"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  color: "rgba(255,255,255,0.4)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "rgba(var(--ink-rgb),0.05)",
+                  color: "rgba(var(--ink-rgb),0.4)",
+                  border: "1px solid rgba(var(--ink-rgb),0.08)",
                 }}
               >
                 Clear all
@@ -80,8 +80,8 @@ export default function NotificationPanel({
             )}
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all hover:bg-white/10"
-              style={{ color: "rgba(255,255,255,0.4)" }}
+              className="w-8 h-8 flex items-center justify-center rounded-lg transition-all hover:bg-black/5 dark:hover:bg-white/10"
+              style={{ color: "rgba(var(--ink-rgb),0.4)" }}
             >
               ✕
             </button>
@@ -99,10 +99,10 @@ export default function NotificationPanel({
                 ✅
               </div>
               <div className="text-center">
-                <p className="text-sm font-semibold mb-1" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <p className="text-sm font-semibold mb-1" style={{ color: "rgba(var(--ink-rgb),0.5)" }}>
                   No active alerts
                 </p>
-                <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+                <p className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.2)" }}>
                   System is operating normally
                 </p>
               </div>
@@ -144,21 +144,21 @@ export default function NotificationPanel({
                       </div>
                       <p
                         className="text-xs leading-relaxed mb-2.5"
-                        style={{ color: "rgba(255,255,255,0.55)" }}
+                        style={{ color: "rgba(var(--ink-rgb),0.55)" }}
                       >
                         {n.message}
                       </p>
                       <div className="flex items-center justify-between">
-                        <span className="text-xs" style={{ color: "rgba(255,255,255,0.22)" }}>
+                        <span className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.22)" }}>
                           {format(parseISO(n.created_at), "MMM dd, HH:mm")}
                         </span>
                         <button
                           onClick={() => onDismiss(n._id)}
-                          className="text-xs px-2.5 py-1 rounded-lg transition-all hover:bg-white/10"
+                          className="text-xs px-2.5 py-1 rounded-lg transition-all hover:bg-black/5 dark:hover:bg-white/10"
                           style={{
-                            background: "rgba(255,255,255,0.06)",
-                            color: "rgba(255,255,255,0.4)",
-                            border: "1px solid rgba(255,255,255,0.08)",
+                            background: "rgba(var(--ink-rgb),0.06)",
+                            color: "rgba(var(--ink-rgb),0.4)",
+                            border: "1px solid rgba(var(--ink-rgb),0.08)",
                           }}
                         >
                           Dismiss
@@ -175,9 +175,9 @@ export default function NotificationPanel({
         {/* Footer */}
         <div
           className="px-5 py-3"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+          style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.05)" }}
         >
-          <p className="text-xs text-center" style={{ color: "rgba(255,255,255,0.18)" }}>
+          <p className="text-xs text-center" style={{ color: "rgba(var(--ink-rgb),0.18)" }}>
             Auto-synced · Updates every 30s with prediction engine
           </p>
         </div>

@@ -31,8 +31,8 @@ export default function AlertTimeline({ history }: AlertTimelineProps) {
     return (
       <div className="flex flex-col items-center justify-center h-36 gap-3">
         <span className="text-3xl">✅</span>
-        <p className="text-sm" style={{ color: "rgba(255,255,255,0.3)" }}>No alerts in recent history</p>
-        <p className="text-xs" style={{ color: "rgba(255,255,255,0.15)" }}>System operating normally</p>
+        <p className="text-sm" style={{ color: "rgba(var(--ink-rgb),0.3)" }}>No alerts in recent history</p>
+        <p className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.15)" }}>System operating normally</p>
       </div>
     );
   }
@@ -42,7 +42,7 @@ export default function AlertTimeline({ history }: AlertTimelineProps) {
       {/* Vertical track */}
       <div
         className="absolute left-3.5 top-2 bottom-2 w-px"
-        style={{ background: "rgba(255,255,255,0.07)" }}
+        style={{ background: "rgba(var(--ink-rgb),0.07)" }}
       />
       <div className="space-y-3 pl-10">
         {events.map((p) => {
@@ -55,7 +55,7 @@ export default function AlertTimeline({ history }: AlertTimelineProps) {
                 className="absolute -left-6.5 top-3 w-3 h-3 rounded-full border-2"
                 style={{
                   background: color,
-                  borderColor: "#0A0F1E",
+                  borderColor: "rgb(var(--bg-rgb))",
                   boxShadow: `0 0 8px ${color}66`,
                   left: "-26px",
                 }}
@@ -76,12 +76,12 @@ export default function AlertTimeline({ history }: AlertTimelineProps) {
                         .join(" · ")}
                     </span>
                   </div>
-                  <span className="text-xs font-mono shrink-0" style={{ color: "rgba(255,255,255,0.25)" }}>
+                  <span className="text-xs font-mono shrink-0" style={{ color: "rgba(var(--ink-rgb),0.25)" }}>
                     {format(parseISO(p.inference_timestamp), "MM/dd HH:mm")}
                   </span>
                 </div>
                 {p.summary.active_recommendations[0] && (
-                  <p className="text-xs leading-relaxed mb-2" style={{ color: "rgba(255,255,255,0.4)" }}>
+                  <p className="text-xs leading-relaxed mb-2" style={{ color: "rgba(var(--ink-rgb),0.4)" }}>
                     {p.summary.active_recommendations[0]}
                   </p>
                 )}
@@ -92,7 +92,7 @@ export default function AlertTimeline({ history }: AlertTimelineProps) {
                   >
                     {p.summary.overall_risk_level}
                   </span>
-                  <span className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+                  <span className="text-xs" style={{ color: "rgba(var(--ink-rgb),0.2)" }}>
                     {p.num_samples.toLocaleString()} samples · Run {p.run_id}
                   </span>
                 </div>

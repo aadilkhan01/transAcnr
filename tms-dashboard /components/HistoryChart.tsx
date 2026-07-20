@@ -24,12 +24,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     <div
       className="p-3 rounded-xl text-xs"
       style={{
-        background: "#0D1424",
-        border: "1px solid rgba(255,255,255,0.1)",
-        color: "rgba(255,255,255,0.85)",
+        background: "var(--panel-strong)",
+        border: "1px solid rgba(var(--ink-rgb),0.1)",
+        color: "rgba(var(--ink-rgb),0.85)",
       }}
     >
-      <p className="mb-2 font-semibold" style={{ color: "rgba(255,255,255,0.5)" }}>{label}</p>
+      <p className="mb-2 font-semibold" style={{ color: "rgba(var(--ink-rgb),0.5)" }}>{label}</p>
       {payload.map((entry: { color: string; name: string; value: number }, i: number) => (
         <div key={i} className="flex gap-2 items-center">
           <span style={{ color: entry.color }}>●</span>
@@ -62,24 +62,24 @@ export default function HistoryChart({ history }: HistoryChartProps) {
             <stop offset="95%" stopColor="#F59E0B" stopOpacity={0} />
           </linearGradient>
           <linearGradient id="gPump" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#00D4FF" stopOpacity={0.3} />
-            <stop offset="95%" stopColor="#00D4FF" stopOpacity={0} />
+            <stop offset="5%" stopColor="var(--accent)" stopOpacity={0.3} />
+            <stop offset="95%" stopColor="var(--accent)" stopOpacity={0} />
           </linearGradient>
           <linearGradient id="gCool" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3} />
             <stop offset="95%" stopColor="#EF4444" stopOpacity={0} />
           </linearGradient>
         </defs>
-        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.04)" />
-        <XAxis dataKey="time" tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }} axisLine={false} tickLine={false} />
-        <YAxis tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 10 }} axisLine={false} tickLine={false} />
+        <CartesianGrid strokeDasharray="3 3" stroke="rgba(var(--ink-rgb),0.04)" />
+        <XAxis dataKey="time" tick={{ fill: "rgba(var(--ink-rgb),0.3)", fontSize: 10 }} axisLine={false} tickLine={false} />
+        <YAxis tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} tick={{ fill: "rgba(var(--ink-rgb),0.3)", fontSize: 10 }} axisLine={false} tickLine={false} />
         <Tooltip content={<CustomTooltip />} />
         <Legend
-          wrapperStyle={{ fontSize: 11, color: "rgba(255,255,255,0.4)" }}
-          formatter={(value) => <span style={{ color: "rgba(255,255,255,0.5)" }}>{value}</span>}
+          wrapperStyle={{ fontSize: 11, color: "rgba(var(--ink-rgb),0.4)" }}
+          formatter={(value) => <span style={{ color: "rgba(var(--ink-rgb),0.5)" }}>{value}</span>}
         />
         <Area type="monotone" dataKey="compressor" name="Compressor" stroke="#F59E0B" fill="url(#gComp)" strokeWidth={2} dot={false} />
-        <Area type="monotone" dataKey="pump" name="Pump" stroke="#00D4FF" fill="url(#gPump)" strokeWidth={2} dot={false} />
+        <Area type="monotone" dataKey="pump" name="Pump" stroke="var(--accent)" fill="url(#gPump)" strokeWidth={2} dot={false} />
         <Area type="monotone" dataKey="cooling" name="Cooling" stroke="#EF4444" fill="url(#gCool)" strokeWidth={2} dot={false} />
       </AreaChart>
     </ResponsiveContainer>
