@@ -18,8 +18,8 @@ export default function AnomalyBar({ score, label, color }: AnomalyBarProps) {
           className="h-2 rounded-full transition-all duration-700"
           style={{
             width: `${pct}%`,
-            background: `linear-gradient(90deg, ${color}88, ${color})`,
-            boxShadow: `0 0 8px ${color}66`,
+            background: `linear-gradient(90deg, color-mix(in srgb, ${color} 53%, transparent), ${color})`,
+            boxShadow: `0 0 8px color-mix(in srgb, ${color} 40%, transparent)`,
           }}
         />
       </div>
