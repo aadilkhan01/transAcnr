@@ -75,7 +75,7 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
             stroke={color}
             strokeWidth="10"
             strokeLinecap="round"
-            style={{ filter: `drop-shadow(0 0 6px ${color})` }}
+            style={{ filter: `drop-shadow(0 0 3px ${color})` }}
           />
         )}
         {/* Center text */}
