@@ -38,7 +38,6 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
   const y1 = cy - R * Math.sin(startAngle);
   const x2 = cx + R * Math.cos(endAngle);
   const y2 = cy - R * Math.sin(endAngle);
-  const largeArc = pct > 50 ? 1 : 0;
 
   return (
     <div
@@ -70,11 +69,12 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
         {/* Fill */}
         {pct > 0 && (
           <path
-            d={`M ${x1} ${y1} A ${R} ${R} 0 ${largeArc} 1 ${x2} ${y2}`}
+            d={`M ${x1} ${y1} A ${R} ${R} 0 0 1 ${x2} ${y2}`}
             fill="none"
             stroke={color}
             strokeWidth="10"
             strokeLinecap="round"
+            style={{ filter: `drop-shadow(0 0 6px ${color})` }}
           />
         )}
         {/* Center text */}
