@@ -1,28 +1,33 @@
 import { MongoClient, MongoClientOptions } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
-if (!uri) {
+if (!process.env.MONGODB_URI) {
   throw new Error("MONGODB_URI environment variable is not set");
 }
-const options: MongoClientOptions = {};
-
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+const uri: string = process.env.MONGODB_URI;
+// Force IPv4: Vercel's serverless network egress can fail TLS negotiation
+// against Atlas shard endpoints over IPv6, surfacing as a generic
+// MongoServerSelectionError / "tlsv1 alert internal error".
+const options: MongoClientOptions = { family: 4 };
 
 declare global {
   // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
-  }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+function connect(): Promise<MongoClient> {
+  const client = new MongoClient(uri, options);
+  return client.connect().catch((err) => {
+    // Don't let a failed connection attempt get stuck cached in a warm
+    // serverless container — clear it so the next call retries fresh.
+    global._mongoClientPromise = undefined;
+    throw err;
+  });
 }
+
+if (!global._mongoClientPromise) {
+  global._mongoClientPromise = connect();
+}
+
+const clientPromise = global._mongoClientPromise;
 
 export default clientPromise;

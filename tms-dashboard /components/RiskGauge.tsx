@@ -58,7 +58,7 @@ export default function RiskGauge({ probability, riskLevel, label, triggered }: 
       )}
 
       {/* SVG Gauge */}
-      <svg width="140" height="80" viewBox="0 0 140 80">
+      <svg width="140" height="92" viewBox="0 0 140 92">
         {/* Track */}
         <path
           d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy}`}
