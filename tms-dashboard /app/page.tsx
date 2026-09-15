@@ -306,7 +306,7 @@ export default function DashboardPage() {
                 <AnomalyBar score={latest?.predictions?.cooling_degradation?.anomaly_score}  label="Cooling System" color="#EF4444" />
               </div>
               <p className="mt-4 pt-4 text-xs" style={{ borderTop: "1px solid rgba(var(--ink-rgb),0.06)", color: "rgba(var(--ink-rgb),0.22)" }}>
-                Deviation from normal operating range (0 = normal, 1 = highly anomalous).
+                Isolation Forest anomaly score, centered on 0 — more negative (left) indicates greater deviation from normal.
               </p>
             </div>
 
